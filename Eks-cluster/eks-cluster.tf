@@ -4,7 +4,7 @@ resource "aws_eks_cluster" "game-eks-cluster" {
 
   vpc_config {
     subnet_ids = [data.aws_subnet.public-subnet.id,aws_subnet.public-subnet2.id]
-    security_group_ids = [data.aws_security_group.sg_vpc.id]
+    security_group_ids = [data.aws_security_group.sg_http_ssh.id]
   }
 
   version = 1.28
