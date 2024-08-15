@@ -1,0 +1,9 @@
+vpc_name = "terraform-cicd-gameapp"
+vpc_az = ["eu-west-1a"]
+vpc_cidr = "12.0.0.0/16"
+cidr_public_subnet = ["12.0.1.0/24"]
+cidr_private_subnet = ["12.0.3.0/24"]
+public_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIQwInx4YLvZZXEZ3KtNLVTh0Vvntb2UzXrtzTvrSb9b root@ip-172-31-17-174"
+instance_type = "t2.xlarge"
+ec2_ami_id = "ami-0c38b837cd80f13bb"
+vpc_sg_allowports = [22,443,80]
