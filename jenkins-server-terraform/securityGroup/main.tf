@@ -23,6 +23,7 @@ resource "aws_security_group" "sg_http_ssh" {
     from_port = port
     to_port = port
     protocol = "tcp"
+    description = "port allow "
     ipv6_cidr_blocks = []
     prefix_list_ids  = []
     security_groups  = []
@@ -47,6 +48,7 @@ resource "aws_security_group" "sg_jenkinsPort_group" {
   vpc_id = var.vpc_id
    
    ingress {
+    description = "port allow 8080 "
     cidr_blocks = ["0.0.0.0/0"]
     from_port = 8080
     to_port = 8080
@@ -57,6 +59,7 @@ resource "aws_security_group" "sg_jenkinsPort_group" {
     self             = null
    }
    ingress {
+   description = "port allow 9000 "
     cidr_blocks = ["0.0.0.0/0"]
     from_port = 9000
     to_port = 9000
