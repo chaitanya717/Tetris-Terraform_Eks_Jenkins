@@ -23,6 +23,10 @@ resource "aws_security_group" "sg_http_ssh" {
     from_port = port
     to_port = port
     protocol = "tcp"
+    ipv6_cidr_blocks = []
+    prefix_list_ids  = []
+    security_groups  = []
+    self             = null
     }
   ]
 
@@ -47,12 +51,20 @@ resource "aws_security_group" "sg_jenkinsPort_group" {
     from_port = 8080
     to_port = 8080
     protocol = "tcp"
+    ipv6_cidr_blocks = []
+    prefix_list_ids  = []
+    security_groups  = []
+    self             = null
    }
    ingress {
     cidr_blocks = ["0.0.0.0/0"]
     from_port = 9000
     to_port = 9000
     protocol = "tcp"
+    ipv6_cidr_blocks = []
+    prefix_list_ids  = []
+    security_groups  = []
+    self             = null
    }
 
    tags = {
