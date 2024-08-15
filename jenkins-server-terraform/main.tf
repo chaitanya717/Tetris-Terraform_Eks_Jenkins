@@ -25,7 +25,7 @@ module "jenkinsServer" {
     subnet_id = tolist(module.networking.dev_proj_public_subnet)[0]
     sg_for_jenkins = [module.securitygroup.output_id_sg_jenkinsport_group, module.securitygroup.output_id_sg_http_ssh]
     enable_public_ip_address = true
-    user_data_install_jenkins = templatefile("../jenkinsSer_userdata/jenkinsinstall.sh",{})
+      user_data_install_jenkins = templatefile("./jenkinsinstall.sh",{})
 }
 
 # module "targetgroup" {
