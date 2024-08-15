@@ -22,7 +22,7 @@ data "aws_subnet" "public-subnet" {
   }
 }
 
-data "aws_security_group" "sg_vpc" {
+data "aws_security_group" "sg_http_ssh" {
   filter {
     name   = "tag:Name"
     values = [var.security-group-name]
