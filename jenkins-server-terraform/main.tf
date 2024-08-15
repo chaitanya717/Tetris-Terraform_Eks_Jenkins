@@ -9,7 +9,7 @@ module "networking" {
 
 module "securitygroup" {
   source = "./securityGroup"
- ec2_sg_name = "security group for allow traffic"
+ ec2_sg_name = "sSg-ssh-http"
  vpc_id = module.networking.flask_api_vpcid
  ec2_jenkins_sg_name = "Allow port 8080 for jenkins"
  vpc_sg_allowports = var.vpc_sg_allowports
