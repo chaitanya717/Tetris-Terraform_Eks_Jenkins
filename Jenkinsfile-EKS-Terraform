@@ -13,73 +13,71 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/chaitanya717/Tetris-Terraform_Eks_Jenkins.git'
             }
         }
-        
+
         stage('Initializing Terraform') {
             steps {
                 withCredentials([[
-                        $class: 'AmazonWebServicesCredentialsBinding',
-                        credentialsId: 'aws-key'
-                    ]]) {
-                dir('Eks-cluster') {
-                    script {
-                        sh 'terraform init'
+                    $class: 'AmazonWebServicesCredentialsBinding',
+                    credentialsId: 'aws-key'
+                ]]) {
+                    dir('Eks-cluster') {
+                        script {
+                            sh 'terraform init'
+                        }
                     }
-                }
                 }
             }
         }
-        
+
         stage('Validate Terraform Code') {
             steps {
                 withCredentials([[
-                        $class: 'AmazonWebServicesCredentialsBinding',
-                        credentialsId: 'aws-key'
-                    ]]) {
-                dir('Eks-cluster') {
-                    script {
-                        sh 'terraform validate'
+                    $class: 'AmazonWebServicesCredentialsBinding',
+                    credentialsId: 'aws-key'
+                ]]) {
+                    dir('Eks-cluster') {
+                        script {
+                            sh 'terraform validate'
+                        }
                     }
-                }
                 }
             }
         }
-        
+
         stage('Terraform Plan') {
             steps {
                 withCredentials([[
-                        $class: 'AmazonWebServicesCredentialsBinding',
-                        credentialsId: 'aws-key'
-                    ]]) {
-                dir('Eks-cluster') {
-                    script {
-                        sh "terraform plan -var-file=${params.'File-Name'}"
+                    $class: 'AmazonWebServicesCredentialsBinding',
+                    credentialsId: 'aws-key'
+                ]]) {
+                    dir('Eks-cluster') {
+                        script {
+                            sh "terraform plan -var-file=${params.'File-Name'}"
+                        }
                     }
-                }
                 }
             }
         }
-        
+
         stage('Terraform Action') {
             steps {
                 withAWS(credentials: 'aws-key', region: 'us-east-1') { 
-                script {
-                    echo "${params.'Terraform-Action'}"
-                    dir('Eks-cluster') {
-                        script {
-                            if (params.'Terraform-Action' == 'apply') {
-                                sh "terraform apply -auto-approve -var-file=${params.'File-Name'}"
-                            } else if (params.'Terraform-Action' == 'destroy') {
-                                sh "terraform destroy -auto-approve -var-file=${params.'File-Name'}"
-                            } else {
-                                error "Invalid value for Terraform-Action: ${params.'Terraform-Action'}"
+                    script {
+                        echo "${params.'Terraform-Action'}"
+                        dir('Eks-cluster') {
+                            script {
+                                if (params.'Terraform-Action' == 'apply') {
+                                    sh "terraform apply -auto-approve -var-file=${params.'File-Name'}"
+                                } else if (params.'Terraform-Action' == 'destroy') {
+                                    sh "terraform destroy -auto-approve -var-file=${params.'File-Name'}"
+                                } else {
+                                    error "Invalid value for Terraform-Action: ${params.'Terraform-Action'}"
+                                }
                             }
                         }
                     }
                 }
-                }
             }
-        }
-        
         }
     }
 }
