@@ -10,13 +10,17 @@ pipeline {
     stages {
         stage('Checkout from Git') {
             steps {
-                git branch: 'master', url: 'https://github.com/AmanPathak-DevOps/End-to-End-Kubernetes-DevSecOps-Tetris-Project.git'
+                git branch: 'main', url: 'https://github.com/chaitanya717/Tetris-Terraform_Eks_Jenkins.git'
             }
         }
+        
         stage('Initializing Terraform') {
             steps {
-                withAWS(credentials: 'aws-key', region: 'us-east-1') {
-                dir('EKS-TF') {
+                withCredentials([[
+                        $class: 'AmazonWebServicesCredentialsBinding',
+                        credentialsId: 'aws-key'
+                    ]]) {
+                dir('Eks-cluster') {
                     script {
                         sh 'terraform init'
                     }
@@ -24,10 +28,14 @@ pipeline {
                 }
             }
         }
+        
         stage('Validate Terraform Code') {
             steps {
-                withAWS(credentials: 'aws-key', region: 'us-east-1') {
-                dir('EKS-TF') {
+                withCredentials([[
+                        $class: 'AmazonWebServicesCredentialsBinding',
+                        credentialsId: 'aws-key'
+                    ]]) {
+                dir('Eks-cluster') {
                     script {
                         sh 'terraform validate'
                     }
@@ -35,10 +43,14 @@ pipeline {
                 }
             }
         }
+        
         stage('Terraform Plan') {
             steps {
-                withAWS(credentials: 'aws-key', region: 'us-east-1') {
-                dir('EKS-TF') {
+                withCredentials([[
+                        $class: 'AmazonWebServicesCredentialsBinding',
+                        credentialsId: 'aws-key'
+                    ]]) {
+                dir('Eks-cluster') {
                     script {
                         sh "terraform plan -var-file=${params.'File-Name'}"
                     }
@@ -46,12 +58,13 @@ pipeline {
                 }
             }
         }
+        
         stage('Terraform Action') {
             steps {
                 withAWS(credentials: 'aws-key', region: 'us-east-1') { 
                 script {
                     echo "${params.'Terraform-Action'}"
-                    dir('EKS-TF') {
+                    dir('Eks-cluster') {
                         script {
                             if (params.'Terraform-Action' == 'apply') {
                                 sh "terraform apply -auto-approve -var-file=${params.'File-Name'}"
@@ -65,6 +78,8 @@ pipeline {
                 }
                 }
             }
+        }
+        
         }
     }
 }
