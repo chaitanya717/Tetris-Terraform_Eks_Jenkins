@@ -39,15 +39,6 @@ sudo apt install unzip -y
 unzip awscliv2.zip
 sudo ./aws/install
 
-# Installing Kubectl
-#!/bin/bash
-sudo apt update
-sudo apt install curl -y
-sudo curl -LO "https://dl.k8s.io/release/v1.28.4/bin/linux/amd64/kubectl"
-sudo chmod +x kubectl
-sudo mv kubectl /usr/local/bin/
-kubectl version --client
-
 # Installing Terraform
 #!/bin/bash
 wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg

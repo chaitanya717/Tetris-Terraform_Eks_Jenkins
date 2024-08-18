@@ -12,3 +12,11 @@ variable "iam-policy-eks" {}
 variable "iam-policy-node" {}
 variable "cluster-name" {}
 variable "eksnode-group-name" {}
+
+variable "ami_id" {}
+variable "instance_type" {}
+variable "tag_name" {}
+variable "public_key" {}
+variable "subnetNameKubectl" {}
+variable "securityGroupNameKubectl" {}
+variable "user_data_install_kubectl" {}
