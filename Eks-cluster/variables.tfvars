@@ -20,4 +20,3 @@ tag_name = "kubectl_ec2_instance"
 subnetNameKubectl = "eks-cluster-subnet"
 securityGroupNameKubectl = "SecurityGrp to allow SSH(22) and HTTP(80)"
 public_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGTHq+9IPyIQfL3Sder5omaXxvqRlVnXX4bhXDUEBSHc root@ip-172-31-17-174"
-user_data_install_kubectl = templatefile("./kubectlinstall.sh",{})
