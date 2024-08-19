@@ -19,4 +19,3 @@ variable "tag_name" {}
 variable "public_key" {}
 variable "subnetNameKubectl" {}
 variable "securityGroupNameKubectl" {}
-variable "user_data_install_kubectl" {}
