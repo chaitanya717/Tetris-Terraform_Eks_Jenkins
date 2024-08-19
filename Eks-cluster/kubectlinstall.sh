@@ -16,35 +16,35 @@ unzip awscliv2.zip
 
 sudo ./aws/install
 
-#!/bin/bash
+# !/bin/bash
 # Check if the correct number of arguments is provided
-if [ "$#" -ne 2 ]; then
-    echo "Usage: $0 <AWS_ACCESS_KEY_ID> <AWS_SECRET_ACCESS_KEY>"
-    exit 1
-fi
+# if [ "$#" -ne 2 ]; then
+#     echo "Usage: $0 <AWS_ACCESS_KEY_ID> <AWS_SECRET_ACCESS_KEY>"
+#     exit 1
+# fi
 
-# Get the AWS credentials from the arguments
-AWS_ACCESS_KEY_ID="$1"
-AWS_SECRET_ACCESS_KEY="$2"
+# # Get the AWS credentials from the arguments
+# AWS_ACCESS_KEY_ID="$1"
+# AWS_SECRET_ACCESS_KEY="$2"
 
-# Optionally, you can hardcode or set the AWS region as a variable
-AWS_REGION="us-east-1"
+# # Optionally, you can hardcode or set the AWS region as a variable
+# AWS_REGION="us-east-1"
 
-# Configure AWS CLI with the provided credentials
-aws configure set aws_access_key_id "$AWS_ACCESS_KEY_ID"
-aws configure set aws_secret_access_key "$AWS_SECRET_ACCESS_KEY"
-aws configure set region "$AWS_REGION"
+# # Configure AWS CLI with the provided credentials
+# aws configure set aws_access_key_id "$AWS_ACCESS_KEY_ID"
+# aws configure set aws_secret_access_key "$AWS_SECRET_ACCESS_KEY"
+# aws configure set region "$AWS_REGION"
 
-# Verify the credentials by listing S3 buckets (as an example)
-echo "Verifying credentials by listing S3 buckets..."
-aws s3 ls
+# # Verify the credentials by listing S3 buckets (as an example)
+# echo "Verifying credentials by listing S3 buckets..."
+# aws s3 ls
 
-# Check if the aws s3 ls command was successful
-if [ $? -eq 0 ]; then
-    echo "Successfully signed in to AWS!"
-else
-    echo "Failed to sign in to AWS. Please check your credentials."
-fi
+# # Check if the aws s3 ls command was successful
+# if [ $? -eq 0 ]; then
+#     echo "Successfully signed in to AWS!"
+# else
+#     echo "Failed to sign in to AWS. Please check your credentials."
+# fi
 
 # Installing Kubectl
 #!/bin/bash
