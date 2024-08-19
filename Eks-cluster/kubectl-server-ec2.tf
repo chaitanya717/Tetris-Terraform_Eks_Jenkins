@@ -17,7 +17,7 @@ resource "aws_instance" "kubectl_ec2_instance" {
   subnet_id = data.aws_subnet.public-subnet.id
   vpc_security_group_ids = [data.aws_security_group.sg_http_ssh.id]
   associate_public_ip_address = true
-  user_data = var.user_data_install_kubectl
+  user_data = templatefile("./kubectlinstall.sh",{})
   
   metadata_options {
     http_endpoint = "enabled"
