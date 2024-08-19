@@ -1,17 +1,4 @@
 
-data "aws_subnet" "public-subnet" {
-  filter {
-    name   = "tag:Name"
-    values = [var.subnetNameKubectl]
-  }
-}
-data "aws_security_group" "sg_http_ssh" {
-  filter {
-    name   = "tag:Name"
-    values = [var.securityGroupNameKubectl]
-  }
-}
-
 output "kubectlServerid" {
     value = aws_instance.jenkins_ec2_instance_ip_flaskapi.id
 }
