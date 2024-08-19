@@ -1,6 +1,6 @@
 
 output "kubectlServerid" {
-    value = aws_instance.jenkins_ec2_instance_ip_flaskapi.id
+    value = aws_instance.kubectl_ec2_instance.id
 }
 
 resource "aws_key_pair" "instance_key" {
