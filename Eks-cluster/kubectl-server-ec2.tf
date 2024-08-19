@@ -1,19 +1,6 @@
 
-data "aws_subnet" "public-subnet" {
-  filter {
-    name   = "tag:Name"
-    values = [var.subnetNameKubectl]
-  }
-}
-data "aws_security_group" "sg_http_ssh" {
-  filter {
-    name   = "tag:Name"
-    values = [var.securityGroupNameKubectl]
-  }
-}
-
 output "kubectlServerid" {
-    value = aws_instance.jenkins_ec2_instance_ip_flaskapi.id
+    value = aws_instance.kubectl_ec2_instance.id
 }
 
 resource "aws_key_pair" "instance_key" {
@@ -30,7 +17,7 @@ resource "aws_instance" "kubectl_ec2_instance" {
   subnet_id = data.aws_subnet.public-subnet.id
   vpc_security_group_ids = [data.aws_security_group.sg_http_ssh.id]
   associate_public_ip_address = true
-  user_data = var.user_data_install_kubectl
+  user_data = templatefile("./kubectlinstall.sh",{})
   
   metadata_options {
     http_endpoint = "enabled"
