@@ -1,0 +1,23 @@
+vpc-name            = "terraform-cicd-gameapp"
+igw-name            = "igw-dev-proj"
+subnet-name         = "public-subnet-1-dev-proj"
+subnet-name2        = "eks-cluster-subnet"
+subnet-name2_cidr   = "12.0.5.0/24"
+subnet-name2_az     = "eu-west-1b"
+security-group-name = "SecurityGrp to allow SSH(22) and HTTP(80)"
+rt-name2            = "eks-cluster-route-table2"
+iam-role-eks        = "Tetris-iam-role-eks"
+iam-role-node       = "Tetris-iam-role-ec2"
+iam-policy-eks      = "Tetris-iam-policy-eks"
+iam-policy-node     = "Tetris-iam-policy-node"
+cluster-name        = "Tetris-EKS-Cluster"
+eksnode-group-name  = "Tetris-Node-Group"
+
+# kubectl server setup
+ami_id = "ami-0c38b837cd80f13bb"
+instance_type = "t2.medium"
+tag_name = "kubectl_ec2_instance"
+subnetNameKubectl = "eks-cluster-subnet"
+securityGroupNameKubectl = "SecurityGrp to allow SSH(22) and HTTP(80)"
+public_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGTHq+9IPyIQfL3Sder5omaXxvqRlVnXX4bhXDUEBSHc root@ip-172-31-17-174"
+user_data_install_kubectl = templatefile("./kubectlinstall.sh",{})
